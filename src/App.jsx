@@ -56,7 +56,7 @@ export default function App() {
 
 const [listaPedidos, setPedidos] = useState([]);
 
-const adicionarProdutoPedido = () => {
+const adicionarProdutoPedido = (produto) => {
     setPedidos([...listaPedidos, produto]);
 }
     
@@ -64,23 +64,24 @@ const adicionarProdutoPedido = () => {
        <div className="bloco-principal">
         <div className="bloco-produtos">
             {
-                listaProdutos.map((produto)=>
-                    <div key={produto.id}>
-                        <img src={produto.imagem}/>
+                listaProdutos.map((produto)=>(
+                    <div key={produto.id} className="produto">
+                        <img src={produto.imagem} alt={produto.item}/>
                         <p> { produto.item} </p>
-                        <button onClick={()=> adicionarProdutoPedido(pedido)}> Quero</button>
+                        <p>{produto.preco}</p>
+                        <button onClick={()=> adicionarProdutoPedido(pedido)}>Quero!</button>
                     </div>
-                )
+                ))
             }
         </div>
         <div className="bloco-pedidos">
             <p>Meus Pedidos</p>
             {
-                listaPedidos.map((produto)=>
-                <div key={produto.id}>
+                listaPedidos.map((produto)=>(
+                <div key={produto.id} className="pedido">
                     <p>{produto.item}</p>
                 </div>
-                )
+                ))
             }
         </div>
        </div>
