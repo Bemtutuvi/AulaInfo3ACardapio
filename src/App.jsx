@@ -1,8 +1,7 @@
 import "../src/globals.css";
 
-
+//dentro de colchetes é uma lista de objetos
 export default function App() {
-
     const [listaProdutos, setProdutos] = useState([
 
         {
@@ -55,16 +54,35 @@ export default function App() {
 
     ]);
 
+const [listaPedidos, setPedidos] = useState([]);
 
+const adicionarProdutoPedido = () => {
+    setPedidos([...listaPedidos, produto]);
+}
+    
     return (
-       <div>
-        {
-            listaProdutos.map((objeto)=>
-                <div kay={objeto.id}>
-                    <p>{objeto.item}</p>
+       <div className="bloco-principal">
+        <div className="bloco-produtos">
+            {
+                listaProdutos.map((produto)=>
+                    <div key={produto.id}>
+                        <img src={produto.imagem}/>
+                        <p> { produto.item} </p>
+                        <button onClick={()=> adicionarProdutoPedido(pedido)}> Quero</button>
                     </div>
-            )
-        }
+                )
+            }
+        </div>
+        <div className="bloco-pedidos">
+            <p>Meus Pedidos</p>
+            {
+                listaPedidos.map((produto)=>
+                <div key={produto.id}>
+                    <p>{produto.item}</p>
+                </div>
+                )
+            }
+        </div>
        </div>
     );
 }
