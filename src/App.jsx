@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import "../src/globals.css";
+
 export default function App() {
     const [listaProdutos, setProdutos] = useState([
 
@@ -50,58 +51,34 @@ export default function App() {
             preco: "R$ 8,99"
 
         },
-
     ]);
-
-const [listaPedidos, setPedidos] = useState([]);
-
-const adicionarProdutoPedido = (produto) => {
-    setPedidos([...listaPedidos, produto]);
-}
     
+    const [listaPedidos, setPedidos] = useState([]);
+
+    const adicionarProdutoPedido = (produto) => {  
+        setPedidos([...listaPedidos, produto]);
+    }
+    console.table(listaPedidos);
     return (
-       <div className="bloco-principal">
-        <div className="bloco-produtos">
-            {
-                listaProdutos.map((produto)=>(
-                    <div key={produto.id} className="produto">
-                        <img src={produto.imagem} alt={produto.item}/>
-                        <p> { produto.item} </p>
-                        <p>{produto.preco}</p>
-                        <button onClick={()=> adicionarProdutoPedido(produto)}>Quero!</button>
-                    </div>
-                ))
-            }
+        <div className="bloco-principal" >
+            <div className="bloco-produtos">
+                {
+                  listaProdutos.map((produto)=> 
+                      <div key={produto.id}>
+                             <img src={produto.imagem}/>
+                            <p> { produto.item} </p>
+                            <button onClick={() => 
+                                adicionarProdutoPedido(produto)}>Quero</button>
+                      </div>
+                )
+                }
+            </div>
+            <div className="bloco-pedidos">
+                 <p>Meus Pedidos</p>
+                   { 
+                        
+                   }
+            </div>
         </div>
-        <div className="bloco-pedidos">
-            <p>Meus Pedidos</p>
-            {listaPedidos.length> 0 ? (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Item</th>
-                            <th>Imagem</th>
-                            <th>Preço</th>
-                        </tr>
-                    </thead>
-                <tbody>
-                    {listaPedidos.map((produto)=>(
-                        <tr key={produto.id}>
-                            <td>{produto.id}</td>
-                            <td>{produto.item}</td>
-                            <td>
-                                <img src={produto.imagem} alt={produto.item} style={{width:'50px'}}/>
-                            </td>
-                            <td>{produto.preco}</td>
-                        </tr>
-                    ))}
-                </tbody>
-                </table>
-            ) : (
-                <p>Nenhum pedido ainda</p>
-            )}
-        </div>
-       </div>
     );
 }
