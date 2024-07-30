@@ -80,3 +80,11 @@ button{
 button:hover{
     cursor: pointer;
 }
+table{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }

@@ -1,6 +1,5 @@
+import React, { useState } from 'react';
 import "../src/globals.css";
-
-//dentro de colchetes é uma lista de objetos
 export default function App() {
     const [listaProdutos, setProdutos] = useState([
 
@@ -69,20 +68,39 @@ const adicionarProdutoPedido = (produto) => {
                         <img src={produto.imagem} alt={produto.item}/>
                         <p> { produto.item} </p>
                         <p>{produto.preco}</p>
-                        <button onClick={()=> adicionarProdutoPedido(pedido)}>Quero!</button>
+                        <button onClick={()=> adicionarProdutoPedido(produto)}>Quero!</button>
                     </div>
                 ))
             }
         </div>
         <div className="bloco-pedidos">
             <p>Meus Pedidos</p>
-            {
-                listaPedidos.map((produto)=>(
-                <div key={produto.id} className="pedido">
-                    <p>{produto.item}</p>
-                </div>
-                ))
-            }
+            {listaPedidos.length> 0 ? (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Item</th>
+                            <th>Imagem</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    {listaPedidos.map((produto)=>(
+                        <tr key={produto.id}>
+                            <td>{produto.id}</td>
+                            <td>{produto.item}</td>
+                            <td>
+                                <img src={produto.imagem} alt={produto.item} style={{width:'50px'}}/>
+                            </td>
+                            <td>{produto.preco}</td>
+                        </tr>
+                    ))}
+                </tbody>
+                </table>
+            ) : (
+                <p>Nenhum pedido ainda</p>
+            )}
         </div>
        </div>
     );
