@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import "../src/globals.css";
 
 export default function App() {
@@ -51,34 +51,57 @@ export default function App() {
             preco: "R$ 8,99"
 
         },
-    ]);
-    
-    const [listaPedidos, setPedidos] = useState([]);
 
-    const adicionarProdutoPedido = (produto) => {  
-        setPedidos([...listaPedidos, produto]);
+    ]);
+
+const [listaPedidos, setPedidos] = useState([]);
+
+const adicionarProdutoPedido = (produto) => {
+    setPedidos([...listaPedidos, produto]);}
+
+    const removerItem = (id)=>{
+
+        let listaAux= listaPedidos.filter((pedido)=> {
+            if(pedido.id !== id){
+                 
+            }else{
+
+            }
+        )
+        };
+        setPedidos(listaAux);
     }
-    console.table(listaPedidos);
+
     return (
-        <div className="bloco-principal" >
-            <div className="bloco-produtos">
-                {
-                  listaProdutos.map((produto)=> 
-                      <div key={produto.id}>
-                             <img src={produto.imagem}/>
-                            <p> { produto.item} </p>
-                            <button onClick={() => 
-                                adicionarProdutoPedido(produto)}>Quero</button>
-                      </div>
+       <div className="bloco-principal">
+        <div className="bloco-produtos">
+            {
+                listaProdutos.map((produto)=>
+                    <div key={produto.id}>
+                        <img src={produto.imagem}/>
+                        <p> { produto.item} </p>
+                        <button onClick={()=> adicionarProdutoPedido(produto)}>Quero!</button>
+                    </div>
                 )
-                }
-            </div>
-            <div className="bloco-pedidos">
-                 <p>Meus Pedidos</p>
-                   { 
-                        
-                   }
-            </div>
+            }
         </div>
-    );
-}
+        <div className="bloco-pedidos">
+            <p>Meus Pedidos</p>
+            {listaPedidos.map((pedido)=>
+            <table key={pedido.id}>
+                <tr>
+                    <td>
+                        {pedido.item}
+                    </td>
+                    <td>
+                        {pedido.preco}
+                    </td>
+                    <td>
+                        <button onClick={()=> removerItem(pedido.id)}>X</button>
+                    </td>
+                </tr>
+                </table>
+            )}
+            </div>
+            </div>
+    );}
