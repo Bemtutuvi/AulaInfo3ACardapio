@@ -60,16 +60,20 @@ const adicionarProdutoPedido = (produto) => {
     setPedidos([...listaPedidos, produto]);}
 
     const removerItem = (id)=>{
-
-        let listaAux= listaPedidos.filter((pedido)=> {
-            if(pedido.id !== id){
-                 
-            }else{
-
-            }
-        )
-        };
-        setPedidos(listaAux);
+        let remover=false;
+        let listaAux= listaPedidos.filter((pedido)=>
+            {
+                if(pedido.id== id){
+                    if(remover==false){
+                        remover=true;
+                        return null
+                    }
+                }else{
+                    return pedido;
+                }
+            } 
+        );
+        setPedidos(listaAux, remover);
     }
 
     return (
@@ -87,17 +91,17 @@ const adicionarProdutoPedido = (produto) => {
         </div>
         <div className="bloco-pedidos">
             <p>Meus Pedidos</p>
-            {listaPedidos.map((pedido)=>
-            <table key={pedido.id}>
+            {listaPedidos.map((produto)=>
+            <table key={produto.id}>
                 <tr>
                     <td>
-                        {pedido.item}
+                        {produto.item}
                     </td>
                     <td>
-                        {pedido.preco}
+                        {produto.preco}
                     </td>
                     <td>
-                        <button onClick={()=> removerItem(pedido.id)}>X</button>
+                        <button onClick={()=> removerItem(produto.id)}>X</button>
                     </td>
                 </tr>
                 </table>
